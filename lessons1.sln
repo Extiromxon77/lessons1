@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpPosts", "HttpPosts\Http
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comments", "Comments\Comments.csproj", "{9D44A720-49CD-4575-B7CB-E2B645EF864D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albums", "Albums\Albums.csproj", "{BE0A20A9-73D3-4A06-A25A-F895AFC49B6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photos", "Photos\Photos.csproj", "{0512BD96-22CC-4485-A39A-BDD6217517E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{9D44A720-49CD-4575-B7CB-E2B645EF864D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D44A720-49CD-4575-B7CB-E2B645EF864D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D44A720-49CD-4575-B7CB-E2B645EF864D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE0A20A9-73D3-4A06-A25A-F895AFC49B6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0A20A9-73D3-4A06-A25A-F895AFC49B6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0A20A9-73D3-4A06-A25A-F895AFC49B6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0A20A9-73D3-4A06-A25A-F895AFC49B6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0512BD96-22CC-4485-A39A-BDD6217517E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0512BD96-22CC-4485-A39A-BDD6217517E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0512BD96-22CC-4485-A39A-BDD6217517E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0512BD96-22CC-4485-A39A-BDD6217517E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

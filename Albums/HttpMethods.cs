@@ -1,17 +1,18 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Comments
+namespace Albums
 {
     public class HttpMethods
     {
         public static async Task GetAsync(HttpClient httpClient)
         {
-            using HttpResponseMessage response = await httpClient.GetAsync("comments/3");
+            using HttpResponseMessage response = await httpClient.GetAsync("albums/3");
 
             response.EnsureSuccessStatusCode()
                 .WriteRequestToConsole();
@@ -22,16 +23,16 @@ namespace Comments
 
         public static async Task GetFromList(HttpClient httpClient)
         {
-            var comments = await httpClient.GetFromJsonAsync<List<Comments>>(
-               "comments?PostId=1&body=\"\"");
+            var albums = await httpClient.GetFromJsonAsync<List<Albums>>(
+               "albums?userId=1&title=\"\"");
 
-            comments?.ForEach(Console.WriteLine);
+            albums?.ForEach(Console.WriteLine);
         }
 
         public static async Task<string> PostAsJsonAsync(HttpClient httpClient)
         {
             using HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                "comments", new Comments(PostId: 9, Id: 99, Name: "Nimadur", Email: "@email", Body: "dhhfhfg"));
+                "albums", new Albums(UserId: 9, Id: 99, Title: "Nimadur"));
 
             response.EnsureSuccessStatusCode()
                 .WriteRequestToConsole();
@@ -43,7 +44,7 @@ namespace Comments
         public static async Task<string> PutAsJsonAsync(HttpClient httpClient)
         {
             using HttpResponseMessage response = await httpClient.PutAsJsonAsync(
-                "comments/3", new Comments(Name: "Put O`zgartirildi Samga", Body: "dhhfhfg"));
+                "albums/3", new Albums(Title: "Put O`zgartirildi"));
 
             response.EnsureSuccessStatusCode()
                 .WriteRequestToConsole();
@@ -55,7 +56,7 @@ namespace Comments
         public static async Task<string> PatchAsJsonAsync(HttpClient httpClient)
         {
             using HttpResponseMessage response = await httpClient.PatchAsJsonAsync(
-                "comments/3", new Comments(Name: "Patch O`zgartirildi Tomga", Body: "127"));
+                "albums/3", new Albums(Title: "Patch O`zgartirildi"));
 
             response.EnsureSuccessStatusCode()
                 .WriteRequestToConsole();
@@ -66,7 +67,7 @@ namespace Comments
 
         public static async Task<string> DeleteAsync(HttpClient httpClient)
         {
-            using HttpResponseMessage response = await httpClient.DeleteAsync("comments/3");
+            using HttpResponseMessage response = await httpClient.DeleteAsync("albums/3");
 
             response.EnsureSuccessStatusCode()
                 .WriteRequestToConsole();
