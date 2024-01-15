@@ -46,10 +46,10 @@ namespace Users
             return jsonPost;
         }
 
-        public static async Task<string> PutAsJsonAsync(HttpClient httpClient)
+        public static async Task<string> PutAsJsonAsync(HttpClient httpClient, Address address)
         {
             using HttpResponseMessage response = await httpClient.PutAsJsonAsync(
-                "users/4", new User.User(Id: 1234 ));
+                "users/4", new User(Id: 1234,new Address("","","","",new Geo(12.32,23.445))));
 
             response.EnsureSuccessStatusCode()
                 .WriteRequestToConsole();
@@ -61,7 +61,7 @@ namespace Users
         public static async Task<string> PatchAsJsonAsync(HttpClient httpClient)
         {
             using HttpResponseMessage response = await httpClient.PatchAsJsonAsync(
-                "photos/3", new Photos(Title: "Patch O`zgartirildi"));
+                "users/3", new User(Id: 1234, new Address("", "", "", "", new Geo(12.32, 23.445))));
 
             response.EnsureSuccessStatusCode()
                 .WriteRequestToConsole();

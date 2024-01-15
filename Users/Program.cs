@@ -20,7 +20,7 @@ namespace Users
             string resultPost = HttpMethods.PostAsJsonAsync(sheredClined).Result;
             Console.WriteLine(resultPost);
 
-            string resultPut = HttpMethods.PutAsJsonAsync(sheredClined).Result;
+            string resultPut = HttpMethods.PutAsJsonAsync(sheredClined, Address).Result;
             Console.WriteLine(resultPut);
 
             string resultPatch = HttpMethods.PatchAsJsonAsync(sheredClined).Result;

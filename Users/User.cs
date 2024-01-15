@@ -8,19 +8,19 @@ namespace Users
 {
     public record class User(
             int Id,
+            Address Address,
             string Name = "",
             string UserName = "",
-            string Email = "",
-            Address Address
+            string Email = ""
     );
 
-    public record class Address(
+    public record Adress(
+        Geo Geo,
         string Street = "",
         string Suite = "",
         string City = "",
-        string Zipcode = "",
-        Geo Geo
-    );
+        string Zipcode = ""
+     );
 
     public record Geo(
         double Lat,
