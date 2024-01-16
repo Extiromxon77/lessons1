@@ -1,15 +1,13 @@
-﻿using System.Threading;
-using Telegram.Bot;
-using Telegram.Bot.Types;
+﻿using Telegram.Bot.Types;
 
-namespace TelegramBotCreate
+namespace Telegramvaluta
 {
     public class Program
-    { 
+    {
 
         static async Task Main(string[] args)
         {
-            const string MyBot = "6808479886:AAHQMWoqjaONXgyQQwGlbv07-0XM9RHYUCs";
+            const string MyBot = "6815692764:AAGypf3Soqub5DPpbbEORyGnB8DAczx1q0o";
 
             TelegramBotHandler handler = new TelegramBotHandler(MyBot);
 

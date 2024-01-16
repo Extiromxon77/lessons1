@@ -6,11 +6,12 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace TelegramBotCreate
+namespace Telegramvaluta
 {
     public class TelegramBotHandler
     {
         public string Token { get; set; }
+        public decimal Sum;
         public TelegramBotHandler(string token)
         {
             this.Token = token;
@@ -49,7 +50,6 @@ namespace TelegramBotCreate
 
         public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-
             var handler = update.Type switch
             {
                 UpdateType.Message => HandleMessageAsync(botClient, update, cancellationToken),
@@ -77,70 +77,73 @@ namespace TelegramBotCreate
             var handler = message.Type switch
             {
                 MessageType.Text => HandleTextMessageAsync(botClient, update, cancellationToken),
-                MessageType.Video =>HandleVideoMessageAsync(botClient, update, cancellationToken),
-                MessageType.Photo => HandlePhotoMessageAsync(botClient, update, cancellationToken),
-                MessageType.Audio => HandleAudioMessageAsync(botClient, update, cancellationToken),
                 _ => HandleUnknownMessageTypeAsync(update, update, cancellationToken),
 
             };
         }
 
-
-        public async Task HandleVideoMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-        {
-            Message sendVideo = await botClient.SendVideoAsync(
-                chatId: update.Message.Chat.Id,
-                video: InputFile.FromUri("https://artlist.io/stock-footage/clip/flower-arrangement-studio-shot-palm-leaf-tranquil/712469"),
-                cancellationToken: cancellationToken);
-        }
-
-        public async Task HandlePhotoMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-        {
-            Message sendPhoto = await botClient.SendPhotoAsync(
-                chatId: update.Message.Chat.Id,
-                photo: InputFile.FromUri("https://img.freepik.com/free-photo/abstract-glowing-flame-drops-electric-illumination-generative-ai_188544-8092.jpg"),
-                cancellationToken: cancellationToken);
-
-        }
-
-        public async Task HandleAudioMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-        {
-            Message sendAudio = await botClient.SendAudioAsync(
-                chatId: update.Message.Chat.Id,
-                audio: InputFile.FromUri("https://github.com/TelegramBots/book/raw/master/src/docs/audio-guitar.mp3"),
-                cancellationToken: cancellationToken);
-
-        }
         public async Task HandleTextMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-            Message sendText = await botClient.SendTextMessageAsync(
-               chatId: update.Message.Chat.Id,
-               text: "You said:\n" + update.Message.Text,
-               cancellationToken: cancellationToken);
 
-            ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(KeyboardButton.WithRequestContact("Contact Yuborish"));
-            markup.ResizeKeyboard = true;
-            await botClient.SendTextMessageAsync(
-                chatId: update.Message.Chat.Id,
-                text: " ",
-                replyMarkup: markup
-            );
+            if (update.Message.Text == "USD")
+            {
+                //Echo received message text
+                Message sendMessage = await botClient.SendTextMessageAsync(
+                    chatId: update.Message.Chat.Id,
+                    text: $"{update.Message.Text} ni sumga o`tkizib beruvchi sayt",
+                    parseMode: ParseMode.MarkdownV2,
+                    disableNotification: true,
+                    replyToMessageId: update.Message.MessageId,
+                    replyMarkup: new InlineKeyboardMarkup(
+                        InlineKeyboardButton.WithUrl(
+                            text: "USD -> UZS",
+                            url: "https://www.xe.com/currencyconverter/convert/?Amount=1&From=USD&To=UZS")),
+                    cancellationToken: cancellationToken);
+            }
+            else if (update.Message.Text == "EUR")
+            {
+                //Echo received message text
+                Message sendMessage = await botClient.SendTextMessageAsync(
+                    chatId: update.Message.Chat.Id,
+                    text: $"{update.Message.Text} ni sumga o`tkizib beruvchi sayt",
+                    replyToMessageId: update.Message.MessageId,
+                    replyMarkup: new InlineKeyboardMarkup(
+                        InlineKeyboardButton.WithUrl(
+                            text: "EUR -> UZS",
+                            url: "https://www.xe.com/currencyconverter/convert/?Amount=1&From=EUR&To=UZS")),
+                    cancellationToken: cancellationToken);
+            }
+            else if (update.Message.Text == "RUBL")
+            {
+                //Echo received message text
+                Message sendMessage = await botClient.SendTextMessageAsync(
+                    chatId: update.Message.Chat.Id,
+                    text: $"{update.Message.Text} ni sumga o`tkizib beruvchi sayt",
+                    parseMode: ParseMode.MarkdownV2,
+                    disableNotification: true,
+                    replyToMessageId: update.Message.MessageId,
+                    replyMarkup: new InlineKeyboardMarkup(
+                        InlineKeyboardButton.WithUrl(
+                            text: "RUBL -> UZS",
+                            url: "https://finance.rambler.ru/calculators/converter/1-RUB-UZS/")),
+                    cancellationToken: cancellationToken);
+            }
+
         }
-        public Task HandleEditedMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+
+        private Task HandleUnknownMessageTypeAsync(Update update1, Update update2, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+        private Task HandleUnknownUpdateType(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task HandleUnknownUpdateType(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+        private Task HandleEditedMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
-
-        public async Task HandleUnknownMessageTypeAsync(Update update1, Update update2, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
